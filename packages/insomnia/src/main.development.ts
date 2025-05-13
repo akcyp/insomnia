@@ -3,6 +3,7 @@ import { BrowserWindow } from 'electron';
 import contextMenu from 'electron-context-menu';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import fs from 'fs/promises';
+import inspector from 'inspector';
 import path from 'path';
 
 import { userDataFolder } from '../config/config.json';
@@ -138,7 +139,14 @@ if (defaultProtocolSuccessful) {
     console.error(`[electron client protocol] the default application set for '${fullDefaultProtocol}' was not found`);
   }
 }
-
+app.on('quit', () => {
+  if (isDevelopment()) {
+    // stop the inspector if active to unblock electron app exit in development mode
+    if (inspector.url()) {
+      inspector.close();
+    }
+  }
+});
 // Quit when all windows are closed (except on Mac).
 app.on('window-all-closed', () => {
   if (!isMac()) {
