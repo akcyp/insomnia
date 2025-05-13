@@ -1,6 +1,5 @@
 import { type ChildProcess, spawn } from 'child_process';
 import esbuild, { type BuildOptions, type Plugin } from 'esbuild';
-import inspector from 'inspector';
 import { builtinModules } from 'module';
 import path from 'path';
 
