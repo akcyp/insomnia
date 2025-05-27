@@ -357,7 +357,7 @@ export const KeyValueEditor: FC<Props> = ({
           }}
         </ListBox>
       )}
-      <div onKeyDownCapture={onKeyDownOuter} className="relative w-full overflow-hidden flex flex-col">
+      <div onKeyDownCapture={onKeyDownOuter} className="relative flex w-full flex-col overflow-hidden">
         <ListBox
           aria-label="Key-value pairs"
           selectionMode="none"
@@ -529,6 +529,7 @@ export const KeyValueEditor: FC<Props> = ({
                     className="flex aspect-square h-7 items-center justify-center rounded-sm text-sm text-[--color-font] ring-1 ring-transparent transition-all hover:bg-[--hl-xs] focus:ring-inset focus:ring-[--hl-md]"
                     onChange={isSelected => upsertPair(pairsListItems, { ...pair, disabled: !isSelected })}
                     isSelected={!pair.disabled}
+                    isDisabled={isDisabled}
                   >
                     <Icon icon={pair.disabled ? 'square' : 'check-square'} />
                   </ToggleButton>
